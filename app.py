@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from pymongo import MongoClient
@@ -19,7 +20,7 @@ class Patient(db.Model):
     blood_group = db.Column(db.String(10), nullable=True)
 
 # --- 2. MONGODB SETUP ---
-mongo_client = MongoClient('mongodb+srv://sahooalipsa374_db_user:0odelfqX3ZCHbNv3@cluster0.4d4mcm7.mongodb.net/?appName=Cluster0')
+mongo_client = MongoClient(os.environ.get('MONGO_URI'))
 mongo_db = mongo_client['elderly_care']
 medication_collection = mongo_db['medications']
 
