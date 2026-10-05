@@ -88,8 +88,9 @@ def update_status(med_id, new_status):
         {"$set": {"status": new_status}}
     )
     return redirect(url_for('home'))
+# Move this part outside so Gunicorn reads it!
+with app.app_context():
+    db.create_all()
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
     app.run()
